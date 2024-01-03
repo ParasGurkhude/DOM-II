@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMI Calculator</title>
+</head>
+<body>
+  <h2>BMI Calculator</h2>
+  <label for="weight">Enter Weight (in kg):</label>
+  <input type="number" id="weight" placeholder="Enter weight in kg" />
+  <br />
+  <label for="height">Enter Height (in cm):</label>
+  <input type="number" id="height" placeholder="Enter height in cm" />
+  <br />
+  <button onclick="calculateBMI()">Calculate BMI</button>
+  <br />
+  <p id="result"></p>
+
+  <script>
+    function calculateBMI() {
+      // Get user input
+      var weight = document.getElementById("weight").value;
+      var height = document.getElementById("height").value;
+
+      // Validate input
+      if (weight === "" || height === "") {
+        alert("Please enter both weight and height");
+        return;
+      }
+
+      // Convert height to meters (divide by 100)
+      var heightInMeters = height / 100;
+
+      // Calculate BMI
+      var bmi = weight / (heightInMeters * heightInMeters);
+
+      // Display result
+      var resultElement = document.getElementById("result");
+      resultElement.innerHTML = "BMI: " + bmi.toFixed(2) + "<br>";
+
+      // Determine BMI category
+      if (bmi <= 18.4) {
+        resultElement.innerHTML += "Category: Underweight";
+      } else if (bmi >= 18.5 && bmi <= 24.9) {
+        resultElement.innerHTML += "Category: Normal Weight";
+      } else if (bmi >= 25 && bmi <= 29.9) {
+        resultElement.innerHTML += "Category: Overweight";
+      } else {
+        resultElement.innerHTML += "Category: Obese";
+      }
+    }
+  </script>
+</body>
+</html>
