@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+</head>
+<body>
+    <div id="container"></div>
+</body>
+<script>
+    let Container = document.getElementById("container")
+
+    let heading = document.createElement("h1")
+    heading.innerHTML  = "Check your BMI"
+
+    let Heading3 = document.createElement("h3")
+    Heading3.innerHTML = "Enter your weight and height below to check your BMI results"
+
+    let weight = document.createElement("p")
+    weight.innerHTML = "<b>Put your weight in here (KG)</b>"
+
+    let WTinput = document.createElement("input")
+    WTinput.placeholder = "Enter weight in kg"
+    WTinput.type = "number"
+
+    let height = document.createElement("p")
+    height.innerHTML = "<b>Add your height in here (CM)</b>"
+
+    let HTinput = document.createElement("input")
+    HTinput.placeholder = "Enter height in cm"
+    HTinput.type = "number"
+
+    let br = document.createElement('br')
+    let br1 = document.createElement('br')
+
+    let result = document.createElement("button")
+    result.innerText = "Calculate BMI"
+
+    let showAns = document.createElement("p")
+    showAns.id = "result"
+    
+    Container.append(heading, Heading3, weight, WTinput, height, HTinput,br,br1, result, showAns)
+
+    result.addEventListener("click", function(){
+        // Get user input
+        var weight = (WTinput.value)
+        var height = (HTinput.value)
+
+        // Validate input
+        if (weight === "" || height === "") {
+            alert("Please enter both weight and height");
+            return;
+        }
+        // Convert height to meters (divide by 100)
+        var heightInMeters = Number(height) / 100;
+
+        // Calculate BMI
+        var bmi = Number(weight) / (heightInMeters * heightInMeters);
+
+        // Display result
+        var resultElement = document.getElementById("result");
+        resultElement.innerHTML = "BMI: " + bmi.toFixed(2) + "<br>";
+
+        // Determine BMI category
+        if (bmi <= 18.4) {
+        resultElement.innerHTML += "Category: Underweight";
+        } else if (bmi >= 18.5 && bmi <= 24.9) {
+        resultElement.innerHTML += "Category: Normal Weight";
+        } else if (bmi >= 25 && bmi <= 29.9) {
+        resultElement.innerHTML += "Category: Overweight";
+        } else {
+        resultElement.innerHTML += "Category: Obese";
+        }
+    })
+</script>
+
+</html>
